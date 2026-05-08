@@ -18,10 +18,10 @@
     --border: rgba(123,97,255,0.2);
     --mono: 'Space Mono', monospace;
     --sans: 'Syne', sans-serif;
+    --px: clamp(1rem, 5vw, 2.5rem);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -32,7 +32,6 @@
     line-height: 1.6;
   }
 
-  /* ── NOISE OVERLAY ── */
   body::before {
     content: '';
     position: fixed;
@@ -51,43 +50,48 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5rem;
-    background: rgba(10,10,15,0.85);
+    padding: .85rem var(--px);
+    background: rgba(10,10,15,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+    gap: 1rem;
   }
 
   .nav-logo {
     font-family: var(--mono);
-    font-size: .85rem;
+    font-size: .78rem;
     color: var(--accent);
     letter-spacing: .08em;
+    white-space: nowrap;
   }
   .nav-logo span { color: var(--muted); }
 
   nav ul {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: clamp(.75rem, 2vw, 2rem);
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   nav ul a {
-    font-size: .8rem;
+    font-size: .72rem;
     font-weight: 600;
-    letter-spacing: .1em;
+    letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
     transition: color .2s;
+    white-space: nowrap;
   }
   nav ul a:hover { color: var(--accent); }
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 6rem 2.5rem 4rem;
+    padding: 6rem var(--px) 4rem;
     position: relative;
     overflow: hidden;
   }
@@ -103,53 +107,52 @@
 
   .hero-glow {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: min(600px, 80vw);
+    height: min(600px, 80vw);
     border-radius: 50%;
     background: radial-gradient(circle, rgba(0,245,160,.12) 0%, transparent 70%);
-    top: 10%;
-    right: -10%;
+    top: 10%; right: -10%;
     pointer-events: none;
   }
   .hero-glow2 {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: min(500px, 70vw);
+    height: min(500px, 70vw);
     border-radius: 50%;
     background: radial-gradient(circle, rgba(123,97,255,.15) 0%, transparent 70%);
-    bottom: 0;
-    left: -5%;
+    bottom: 0; left: -5%;
     pointer-events: none;
   }
 
   .hero-tag {
     font-family: var(--mono);
-    font-size: .75rem;
+    font-size: .72rem;
     color: var(--accent);
     letter-spacing: .2em;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     gap: .6rem;
+    position: relative;
   }
   .hero-tag::before {
     content: '';
     display: block;
-    width: 32px;
+    width: 28px;
     height: 2px;
     background: var(--accent);
+    flex-shrink: 0;
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    font-size: clamp(2.2rem, 8vw, 6.5rem);
     font-weight: 800;
     line-height: 1.0;
     letter-spacing: -.03em;
     max-width: 900px;
     position: relative;
   }
-
   .hero h1 em {
     font-style: normal;
     color: transparent;
@@ -157,62 +160,60 @@
   }
 
   .hero-sub {
-    margin-top: 1.5rem;
-    font-size: 1.05rem;
+    margin-top: 1.25rem;
+    font-size: clamp(.9rem, 2.2vw, 1.05rem);
     color: var(--muted);
     max-width: 520px;
     font-weight: 400;
+    position: relative;
   }
 
   .hero-ctas {
     display: flex;
-    gap: 1rem;
-    margin-top: 2.5rem;
+    gap: .85rem;
+    margin-top: 2rem;
     flex-wrap: wrap;
+    position: relative;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: .5rem;
-    padding: .8rem 1.8rem;
+    padding: .75rem 1.5rem;
     font-family: var(--mono);
-    font-size: .8rem;
-    letter-spacing: .08em;
+    font-size: .78rem;
+    letter-spacing: .07em;
     font-weight: 700;
     text-decoration: none;
     border-radius: 4px;
     transition: all .25s;
     cursor: pointer;
     border: none;
+    white-space: nowrap;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: #000;
-  }
+  .btn-primary { background: var(--accent); color: #000; }
   .btn-primary:hover { background: #00dba0; transform: translateY(-2px); }
-  .btn-outline {
-    border: 1px solid var(--border);
-    color: var(--text);
-    background: transparent;
-  }
+  .btn-outline { border: 1px solid var(--border); color: var(--text); background: transparent; }
   .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
 
   .hero-stats {
     display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 2.5rem;
+    gap: clamp(1.5rem, 5vw, 3rem);
+    margin-top: 3rem;
+    padding-top: 2rem;
     border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    position: relative;
   }
   .stat-num {
     font-family: var(--mono);
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 700;
     color: var(--accent);
   }
   .stat-label {
-    font-size: .78rem;
+    font-size: .72rem;
     color: var(--muted);
     letter-spacing: .05em;
     text-transform: uppercase;
@@ -221,14 +222,14 @@
 
   /* ── SECTIONS ── */
   section {
-    padding: 5rem 2.5rem;
+    padding: clamp(3rem, 8vw, 5rem) var(--px);
     max-width: 1100px;
     margin: 0 auto;
   }
 
   .section-label {
     font-family: var(--mono);
-    font-size: .7rem;
+    font-size: .68rem;
     letter-spacing: .25em;
     text-transform: uppercase;
     color: var(--accent);
@@ -236,103 +237,91 @@
   }
 
   h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 4.5vw, 3rem);
     font-weight: 800;
     letter-spacing: -.02em;
     line-height: 1.1;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
-
   h2 .hl { color: var(--accent2); }
   h2 .hl2 { color: var(--accent); }
 
-  /* ── DIVIDER ── */
   .divider {
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 0 auto;
   }
 
-  /* ── WHAT IS ── */
+  /* ── WHAT GRID ── */
   .what-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
   }
-  @media(max-width:720px){ .what-grid { grid-template-columns: 1fr; } }
 
   .what-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.75rem;
     transition: border-color .25s, transform .25s;
   }
   .what-card:hover { border-color: var(--accent2); transform: translateY(-4px); }
-  .what-card .icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  .what-card h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .6rem;
-    color: var(--text);
-  }
-  .what-card p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+  .what-card .icon { font-size: 1.75rem; margin-bottom: .85rem; display: block; }
+  .what-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
+  .what-card p { font-size: .87rem; color: var(--muted); line-height: 1.7; }
 
-  /* ── SUBJECTS ── */
-  .subjects-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
+  /* ── CURRICULUM GRID ── */
+  .curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.25rem;
   }
-  .subject-pill {
-    padding: .55rem 1.2rem;
-    border-radius: 100px;
+  .curriculum-card {
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .curriculum-card ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+  .curriculum-card ul li { font-size: .82rem; color: var(--muted); }
+  .curriculum-mod-label {
     font-family: var(--mono);
-    font-size: .75rem;
-    border: 1px solid;
-    transition: all .2s;
-    cursor: default;
+    font-size: .68rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: .25rem;
   }
-  .pill-a { border-color: rgba(0,245,160,.3); color: var(--accent); background: rgba(0,245,160,.06); }
-  .pill-b { border-color: rgba(123,97,255,.3); color: var(--accent2); background: rgba(123,97,255,.06); }
-  .pill-c { border-color: rgba(255,107,53,.3); color: var(--accent3); background: rgba(255,107,53,.06); }
-  .subject-pill:hover { transform: scale(1.05); }
+  .curriculum-mod-title { font-weight: 700; font-size: .95rem; margin-bottom: 1rem; color: var(--text); }
 
   /* ── WE DO ── */
   .we-do-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1.1rem;
   }
   .do-item {
     background: var(--surface2);
     border-left: 3px solid var(--accent);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1.35rem;
     border-radius: 0 6px 6px 0;
     transition: background .2s;
   }
   .do-item:nth-child(even) { border-left-color: var(--accent2); }
   .do-item:nth-child(3n) { border-left-color: var(--accent3); }
   .do-item:hover { background: var(--surface); }
-  .do-item h4 { font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
-  .do-item p { font-size: .82rem; color: var(--muted); }
+  .do-item h4 { font-size: .92rem; font-weight: 700; margin-bottom: .3rem; }
+  .do-item p { font-size: .8rem; color: var(--muted); }
 
   /* ── CURIOSIDADES ── */
   .curiosidades-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 1.1rem;
   }
   .curio-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 1.75rem;
+    padding: 1.6rem;
     position: relative;
     overflow: hidden;
     transition: border-color .25s;
@@ -340,26 +329,25 @@
   .curio-card:hover { border-color: var(--accent); }
   .curio-num {
     font-family: var(--mono);
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: rgba(0,245,160,.08);
     position: absolute;
-    top: -.5rem;
-    right: 1rem;
+    top: -.5rem; right: 1rem;
     line-height: 1;
     pointer-events: none;
   }
-  .curio-card p { font-size: .88rem; color: var(--text); line-height: 1.7; position: relative; }
+  .curio-card p { font-size: .86rem; color: var(--text); line-height: 1.7; position: relative; }
 
-  /* ── TI SECTION ── */
+  /* ── TI ── */
   .ti-intro {
-    background: linear-gradient(135deg, rgba(123,97,255,.1) 0%, rgba(0,245,160,.05) 100%);
+    background: linear-gradient(135deg, rgba(123,97,255,.1), rgba(0,245,160,.05));
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 2.5rem;
   }
-  .ti-intro p { font-size: 1rem; line-height: 1.8; color: var(--text); }
+  .ti-intro p { font-size: .95rem; line-height: 1.8; }
   .ti-intro strong { color: var(--accent); }
 
   .atuacao-chips {
@@ -371,46 +359,36 @@
   .chip {
     background: rgba(123,97,255,.15);
     color: var(--accent2);
-    padding: .35rem .9rem;
+    padding: .3rem .85rem;
     border-radius: 4px;
-    font-size: .78rem;
+    font-size: .75rem;
     font-family: var(--mono);
   }
 
   /* ── CAREER TIMELINE ── */
   .career-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--accent2);
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
     font-family: var(--mono);
     letter-spacing: .05em;
   }
 
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
+  .timeline { position: relative; padding-left: 2rem; }
   .timeline::before {
     content: '';
     position: absolute;
-    left: .35rem;
-    top: 0; bottom: 0;
+    left: .35rem; top: 0; bottom: 0;
     width: 2px;
     background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
   }
-
-  .tl-item {
-    position: relative;
-    margin-bottom: 1.5rem;
-  }
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
   .tl-item::before {
     content: '';
     position: absolute;
-    left: -1.68rem;
-    top: .4rem;
-    width: 10px;
-    height: 10px;
+    left: -1.68rem; top: .4rem;
+    width: 10px; height: 10px;
     border-radius: 50%;
     background: var(--accent);
     border: 2px solid var(--bg);
@@ -418,58 +396,35 @@
   .tl-item:nth-child(2)::before { background: var(--accent2); }
   .tl-item:nth-child(3)::before { background: #5dc8ff; }
   .tl-item:nth-child(4)::before { background: var(--accent3); }
-  .tl-item:nth-child(5)::before { background: #ff4d8d; }
-  .tl-item:nth-child(6)::before { background: #ffd700; }
-
-  .tl-role {
-    font-weight: 700;
-    font-size: .95rem;
-    color: var(--text);
-  }
-  .tl-salary {
-    font-family: var(--mono);
-    font-size: .75rem;
-    color: var(--accent);
-    margin: .2rem 0;
-  }
-  .tl-desc {
-    font-size: .82rem;
-    color: var(--muted);
-  }
+  .tl-role { font-weight: 700; font-size: .92rem; }
+  .tl-salary { font-family: var(--mono); font-size: .73rem; color: var(--accent); margin: .2rem 0; }
+  .tl-desc { font-size: .8rem; color: var(--muted); }
 
   /* ── VESTIBULINHO ── */
   .vest-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
   }
-  @media(max-width:720px){ .vest-grid { grid-template-columns: 1fr; } }
-
   .vest-box {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.75rem;
   }
   .vest-box h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: .75rem;
-    font-family: var(--mono);
-    letter-spacing: .05em;
+    font-size: .9rem; font-weight: 700;
+    color: var(--accent); margin-bottom: .75rem;
+    font-family: var(--mono); letter-spacing: .05em;
   }
-  .vest-box p { font-size: .88rem; color: var(--muted); line-height: 1.75; }
+  .vest-box p { font-size: .86rem; color: var(--muted); line-height: 1.75; }
   .vest-box ul { list-style: none; margin-top: .75rem; }
   .vest-box ul li {
-    font-size: .86rem;
-    color: var(--muted);
+    font-size: .84rem; color: var(--muted);
     padding: .3rem 0;
     border-bottom: 1px solid rgba(255,255,255,.04);
-    display: flex;
-    align-items: flex-start;
-    gap: .5rem;
+    display: flex; align-items: flex-start; gap: .5rem;
   }
   .vest-box ul li::before { content: '›'; color: var(--accent2); font-weight: 700; flex-shrink: 0; }
 
@@ -478,88 +433,63 @@
     overflow-x: auto;
     border-radius: 8px;
     border: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
   }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .85rem;
-  }
-
-  thead {
-    background: rgba(123,97,255,.15);
-  }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 540px; }
+  thead { background: rgba(123,97,255,.15); }
   thead th {
-    padding: 1rem 1.25rem;
+    padding: .9rem 1rem;
     text-align: left;
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    font-weight: 700;
-  }
-  tbody tr {
-    border-top: 1px solid rgba(255,255,255,.04);
-    transition: background .15s;
-  }
-  tbody tr:hover { background: var(--surface2); }
-  tbody td {
-    padding: .85rem 1.25rem;
-    color: var(--text);
-    vertical-align: top;
-  }
-  tbody td:first-child {
-    font-family: var(--mono);
-    font-size: .78rem;
-    color: var(--accent);
+    font-family: var(--mono); font-size: .68rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent2); font-weight: 700;
     white-space: nowrap;
   }
-  tbody td .badge {
-    display: inline-block;
-    padding: .2rem .6rem;
-    border-radius: 4px;
-    font-size: .7rem;
-    font-family: var(--mono);
-    font-weight: 700;
+  tbody tr { border-top: 1px solid rgba(255,255,255,.04); transition: background .15s; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody td { padding: .8rem 1rem; color: var(--text); vertical-align: top; }
+  tbody td:first-child {
+    font-family: var(--mono); font-size: .75rem;
+    color: var(--accent); white-space: nowrap;
+  }
+  .badge {
+    display: inline-block; padding: .2rem .55rem;
+    border-radius: 4px; font-size: .68rem;
+    font-family: var(--mono); font-weight: 700;
+    white-space: nowrap;
   }
   .badge-green { background: rgba(0,245,160,.15); color: var(--accent); }
   .badge-purple { background: rgba(123,97,255,.15); color: var(--accent2); }
   .badge-orange { background: rgba(255,107,53,.15); color: var(--accent3); }
 
-  /* ── INSCRICAO ── */
+  /* ── CTA ── */
   .inscricao-cta {
-    background: linear-gradient(135deg, rgba(0,245,160,.08) 0%, rgba(123,97,255,.12) 100%);
+    background: linear-gradient(135deg, rgba(0,245,160,.08), rgba(123,97,255,.12));
     border: 1px solid rgba(0,245,160,.2);
     border-radius: 12px;
-    padding: 3rem 2.5rem;
+    padding: clamp(1.75rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
   }
-  .inscricao-cta h3 {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: .4rem;
-  }
-  .inscricao-cta p { color: var(--muted); font-size: .9rem; }
-  .inscricao-cta .btn-primary { font-size: .85rem; padding: .9rem 2rem; }
+  .inscricao-cta h3 { font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 800; margin-bottom: .4rem; }
+  .inscricao-cta p { color: var(--muted); font-size: .88rem; }
 
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 2rem 2.5rem;
+    padding: 1.75rem var(--px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: .75rem;
     max-width: 1100px;
     margin: 2rem auto 0;
-    font-size: .78rem;
+    font-size: .75rem;
     color: var(--muted);
     font-family: var(--mono);
   }
@@ -570,21 +500,32 @@
     to   { opacity: 1; transform: translateY(0); }
   }
   .hero > * { animation: fadeUp .6s ease both; }
-  .hero .hero-tag     { animation-delay: .1s; }
-  .hero h1            { animation-delay: .2s; }
-  .hero .hero-sub     { animation-delay: .35s; }
-  .hero .hero-ctas    { animation-delay: .45s; }
-  .hero .hero-stats   { animation-delay: .55s; }
+  .hero .hero-tag  { animation-delay: .1s; }
+  .hero h1         { animation-delay: .2s; }
+  .hero .hero-sub  { animation-delay: .35s; }
+  .hero .hero-ctas { animation-delay: .45s; }
+  .hero .hero-stats{ animation-delay: .55s; }
 
-  /* ── SCROLL REVEAL via Intersection Observer ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .5s ease, transform .5s ease;
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal.visible  { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE OVERRIDES (≤ 480px) ── */
+  @media (max-width: 480px) {
+    nav ul { display: none; }   /* collapse nav links on very small screens */
+    .hero h1 { -webkit-text-stroke-width: 1px; }
+    .hero-stats { gap: 1.25rem; }
+    .stat-num { font-size: 1.5rem; }
+    .inscricao-cta { flex-direction: column; align-items: flex-start; }
+    .inscricao-cta .btn { width: 100%; justify-content: center; }
+    footer { flex-direction: column; text-align: center; }
+    .btn { width: 100%; justify-content: center; }
+    .hero-ctas { flex-direction: column; }
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+
+  /* ── TABLET (481px – 768px) ── */
+  @media (min-width: 481px) and (max-width: 768px) {
+    nav ul { gap: .85rem; }
+    .hero-ctas { flex-wrap: nowrap; }
   }
 </style>
 </head>
@@ -606,7 +547,7 @@
   <div class="hero-glow"></div>
   <div class="hero-glow2"></div>
 
-  <div class="hero-tag">Curso Técnico · ETEC</div>
+  <div class="hero-tag">Curso Técnico · ETEC Embu</div>
   <h1>Desenvolvimento<br>de <em>Sistemas</em></h1>
   <p class="hero-sub">Aprenda a criar software, sites e aplicações do zero — e entre em uma das áreas que mais cresce no mundo.</p>
   <div class="hero-ctas">
@@ -619,7 +560,7 @@
       <div class="stat-label">Módulos de 6 meses</div>
     </div>
     <div>
-      <div class="stat-num">18h</div>
+      <div class="stat-num">18h50</div>
       <div class="stat-label">às 22h45 — Noturno</div>
     </div>
     <div>
@@ -641,129 +582,123 @@
     <div class="what-card">
       <span class="icon">💡</span>
       <h3>Definição</h3>
-      <p>É o curso técnico focado em ensinar como criar, manter e evoluir softwares e sistemas digitais — de aplicativos mobile a sistemas web corporativos. Você aprende a transformar ideias em código funcional.</p>
+      <p>É o curso técnico focado em ensinar como criar, manter e evoluir softwares e sistemas digitais — de aplicativos mobile a sistemas web. Você aprende a transformar ideias em código funcional.</p>
     </div>
     <div class="what-card">
       <span class="icon">🎓</span>
       <h3>Modalidade e Duração</h3>
-      <p>Curso técnico independente (pós-médio) com duração de <strong>18 meses</strong>, dividido em 3 módulos de 6 meses cada. Ao final, você recebe a Habilitação Profissional de <strong>Técnico em Desenvolvimento de Sistemas</strong>.</p>
+      <p>Curso técnico independente (pós-médio) com duração de <strong>18 meses</strong>, dividido em 3 módulos de 6 meses cada. Ao final, você recebe a Habilitação de <strong>Técnico em Desenvolvimento de Sistemas</strong>.</p>
     </div>
     <div class="what-card">
       <span class="icon">🖥️</span>
       <h3>Horário e Local</h3>
-      <p>Período <strong>noturno</strong>: segunda a sexta, das <strong>18h50 às 22h45</strong>. Aulas na ETEC Embu, com laboratórios de informática. Ideal para quem trabalha ou estuda de dia.</p>
+      <p>Período <strong>noturno</strong>: segunda a sexta, das <strong>18h50 às 22h45</strong>. Aulas na ETEC Embu com laboratórios de informática. Ideal para quem trabalha ou estuda de dia.</p>
     </div>
     <div class="what-card">
       <span class="icon">📋</span>
       <h3>Pré-requisito e Perfil</h3>
-      <p>É necessário ter o <strong>ensino médio completo</strong> para ingressar. Ideal para curiosos por tecnologia, quem gosta de resolver problemas ou quer entrar no mercado de TI. Não precisa saber programar — tudo é ensinado do zero.</p>
+      <p>É necessário ter o <strong>ensino médio completo</strong>. Ideal para curiosos por tecnologia que querem entrar no mercado de TI. Não precisa saber programar — tudo é ensinado do zero.</p>
     </div>
   </div>
 
-  <!-- MATERIAS -->
-  <div class="section-label reveal" style="margin-top:4rem">02 — Grade Curricular</div>
+  <!-- MATRIZ CURRICULAR -->
+  <div class="section-label reveal" style="margin-top:3.5rem">02 — Grade Curricular</div>
   <h2 class="reveal">Matérias que você <span class="hl2">vai estudar</span></h2>
 
-  <div class="subjects-wrap reveal">
-    <div style="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:.5rem">
-
-      <div style="background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2);border-radius:8px;padding:1.5rem">
-        <div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;color:var(--accent);text-transform:uppercase;margin-bottom:.25rem">Módulo I · 6 meses</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:1rem;color:var(--text)">Auxiliar em Desenvolvimento de Sistemas</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem">
-          <li style="font-size:.82rem;color:var(--muted)">› Linguagem, Trabalho e Tecnologia</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação e Algoritmos</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Banco de Dados I</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Análise e Projeto de Sistemas</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Design Digital</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação Web I</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Técnicas de Programação</li>
-        </ul>
-      </div>
-
-      <div style="background:rgba(123,97,255,.06);border:1px solid rgba(123,97,255,.2);border-radius:8px;padding:1.5rem">
-        <div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;color:var(--accent2);text-transform:uppercase;margin-bottom:.25rem">Módulo II · 6 meses</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:1rem;color:var(--text)">Programador de Computadores</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem">
-          <li style="font-size:.82rem;color:var(--muted)">› Inglês Instrumental</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Desenvolvimento de Sistemas</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Banco de Dados II</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Internet e Protocolos</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação de Aplicativos Mobile I</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação Web II</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Planejamento do TCC</li>
-        </ul>
-      </div>
-
-      <div style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:8px;padding:1.5rem">
-        <div style="font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;color:var(--accent3);text-transform:uppercase;margin-bottom:.25rem">Módulo III · 6 meses</div>
-        <div style="font-weight:700;font-size:1rem;margin-bottom:1rem;color:var(--text)">Técnico em Desenvolvimento de Sistemas</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem">
-          <li style="font-size:.82rem;color:var(--muted)">› Segurança de Sistemas de Informação</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Banco de Dados III</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Sistemas Embarcados</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação de Aplicativos Mobile II</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Programação Web III</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Qualidade e Teste de Software</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Ética e Cidadania Organizacional</li>
-          <li style="font-size:.82rem;color:var(--muted)">› Desenvolvimento do TCC</li>
-        </ul>
-      </div>
-
+  <div class="curriculum-grid reveal">
+    <div class="curriculum-card" style="background:rgba(0,245,160,.06);border:1px solid rgba(0,245,160,.2)">
+      <div class="curriculum-mod-label" style="color:var(--accent)">Módulo I · 6 meses</div>
+      <div class="curriculum-mod-title">Auxiliar em Desenvolvimento de Sistemas</div>
+      <ul>
+        <li>› Linguagem, Trabalho e Tecnologia</li>
+        <li>› Programação e Algoritmos</li>
+        <li>› Banco de Dados I</li>
+        <li>› Análise e Projeto de Sistemas</li>
+        <li>› Design Digital</li>
+        <li>› Programação Web I</li>
+        <li>› Técnicas de Programação</li>
+      </ul>
+    </div>
+    <div class="curriculum-card" style="background:rgba(123,97,255,.06);border:1px solid rgba(123,97,255,.2)">
+      <div class="curriculum-mod-label" style="color:var(--accent2)">Módulo II · 6 meses</div>
+      <div class="curriculum-mod-title">Programador de Computadores</div>
+      <ul>
+        <li>› Inglês Instrumental</li>
+        <li>› Desenvolvimento de Sistemas</li>
+        <li>› Banco de Dados II</li>
+        <li>› Internet e Protocolos</li>
+        <li>› Programação de Aplicativos Mobile I</li>
+        <li>› Programação Web II</li>
+        <li>› Planejamento do TCC</li>
+      </ul>
+    </div>
+    <div class="curriculum-card" style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2)">
+      <div class="curriculum-mod-label" style="color:var(--accent3)">Módulo III · 6 meses</div>
+      <div class="curriculum-mod-title">Técnico em Desenvolvimento de Sistemas</div>
+      <ul>
+        <li>› Segurança de Sistemas de Informação</li>
+        <li>› Banco de Dados III</li>
+        <li>› Sistemas Embarcados</li>
+        <li>› Programação de Aplicativos Mobile II</li>
+        <li>› Programação Web III</li>
+        <li>› Qualidade e Teste de Software</li>
+        <li>› Ética e Cidadania Organizacional</li>
+        <li>› Desenvolvimento do TCC</li>
+      </ul>
     </div>
   </div>
 
   <!-- O QUE FAZEMOS -->
-  <div class="section-label reveal" style="margin-top:4rem">03 — Na Prática</div>
-  <h2 class="reveal">O que os alunos <span class="hl">constroem?</span></h2>
+  <div class="section-label reveal" style="margin-top:3.5rem">03 — Na Prática</div>
+  <h2 class="reveal">O que o técnico <span class="hl">faz?</span></h2>
 
   <div class="we-do-list reveal">
     <div class="do-item">
       <h4>Analisa e Projeta Sistemas</h4>
-      <p>Levantamento de requisitos, modelagem de processos e arquitetura de soluções de software.</p>
+      <p>Levantamento de requisitos, modelagem de processos e arquitetura de soluções.</p>
     </div>
     <div class="do-item">
       <h4>Constrói, Documenta e Testa</h4>
-      <p>Escreve código, documenta funcionalidades e realiza testes de qualidade antes de publicar.</p>
+      <p>Escreve código, documenta funcionalidades e realiza testes de qualidade.</p>
     </div>
     <div class="do-item">
       <h4>Mantém Sistemas de Informação</h4>
-      <p>Corrige bugs, aplica atualizações e garante o funcionamento contínuo de sistemas em produção.</p>
+      <p>Corrige bugs, aplica atualizações e garante o funcionamento contínuo dos sistemas.</p>
     </div>
     <div class="do-item">
       <h4>Modela e Mantém Banco de Dados</h4>
-      <p>Cria estruturas de banco de dados, escreve queries e garante integridade das informações.</p>
+      <p>Cria estruturas de BD, escreve queries e garante a integridade dos dados.</p>
     </div>
     <div class="do-item">
       <h4>Desenvolve Aplicativos Mobile</h4>
-      <p>Cria apps para Android e iOS usando linguagens como Java, Kotlin, Flutter e outras.</p>
+      <p>Cria apps para Android e iOS com Java, C#, C++ e outras linguagens.</p>
     </div>
     <div class="do-item">
       <h4>Programação Web</h4>
-      <p>HTML, CSS, JavaScript, PHP, Python e frameworks modernos para front-end e back-end.</p>
+      <p>HTML, CSS, JavaScript, PHP, Python — front-end e back-end completo.</p>
     </div>
   </div>
 
   <!-- CURIOSIDADES -->
-  <div class="section-label reveal" style="margin-top:4rem">04 — Curiosidades</div>
+  <div class="section-label reveal" style="margin-top:3.5rem">04 — Curiosidades</div>
   <h2 class="reveal">Você <span class="hl2">sabia?</span></h2>
 
   <div class="curiosidades-grid reveal">
     <div class="curio-card">
       <span class="curio-num">01</span>
-      <p>O Brasil é o <strong>maior mercado de tecnologia da América Latina</strong> e tem déficit de mais de 400 mil profissionais de TI — ou seja, vagas sobram para quem se forma.</p>
+      <p>O Brasil tem déficit de mais de <strong>400 mil profissionais de TI</strong> — as vagas sobram para quem se forma na área.</p>
     </div>
     <div class="curio-card">
       <span class="curio-num">02</span>
-      <p>Alunos do curso técnico de DS já ingressaram no mercado de trabalho <strong>ainda durante o curso</strong>, como estagiários ou jovens aprendizes em grandes empresas.</p>
+      <p>Alunos do curso técnico de DS ingressam no mercado <strong>ainda durante o curso</strong>, como estagiários em grandes empresas.</p>
     </div>
     <div class="curio-card">
       <span class="curio-num">03</span>
-      <p>O curso é <strong>100% gratuito</strong> — sem mensalidades, sem taxas de matrícula. Basta passar no Vestibulinho e garantir sua vaga.</p>
+      <p>O curso é <strong>100% gratuito</strong> — sem mensalidades nem taxas. Basta passar no Vestibulinho e garantir sua vaga.</p>
     </div>
     <div class="curio-card">
       <span class="curio-num">04</span>
-      <p>O certificado técnico emitido pela ETEC tem <strong>reconhecimento nacional e internacional</strong>, sendo aceito em processos seletivos de grandes empresas de tecnologia.</p>
+      <p>Você sai com <strong>3 certificados</strong>: Auxiliar em DS (Mod. I), Programador de Computadores (Mod. II) e Técnico em DS (Mod. III).</p>
     </div>
   </div>
 
@@ -777,8 +712,8 @@
   <h2 class="reveal">O mercado de <span class="hl">Tecnologia</span></h2>
 
   <div class="ti-intro reveal">
-    <p>A <strong>Tecnologia da Informação (TI)</strong> é o conjunto de conhecimentos, ferramentas e processos usados para criar, armazenar, distribuir e gerenciar informações digitais. É a espinha dorsal do mundo moderno — sem TI, não existem bancos digitais, apps de delivery, redes sociais, sistemas hospitalares ou qualquer serviço digital que usamos no dia a dia.</p>
-    <p style="margin-top:1rem">Você pode atuar como <strong>funcionário CLT em empresas</strong>, <strong>freelancer</strong>, <strong>empreendedor</strong> com seu próprio produto digital, ou até de forma <strong>100% remota para o exterior</strong> — ganhando em dólar ou euro.</p>
+    <p>A <strong>Tecnologia da Informação (TI)</strong> é o conjunto de conhecimentos, ferramentas e processos usados para criar, armazenar e gerenciar informações digitais. É a espinha dorsal do mundo moderno — sem TI, não existem bancos digitais, apps de delivery, redes sociais ou sistemas hospitalares.</p>
+    <p style="margin-top:1rem">Você pode atuar como <strong>funcionário CLT</strong>, <strong>freelancer</strong>, <strong>empreendedor</strong> com seu próprio produto digital, ou de forma <strong>100% remota para o exterior</strong> — ganhando em dólar ou euro.</p>
     <div class="atuacao-chips">
       <span class="chip">Desenvolvimento de Software</span>
       <span class="chip">Administração de Banco de Dados</span>
@@ -826,35 +761,33 @@
   <div class="vest-grid reveal">
     <div class="vest-box">
       <h3>// O que é?</h3>
-      <p>O Vestibulinho é o processo seletivo das ETECs (Escolas Técnicas Estaduais do Centro Paula Souza) para ingresso nos cursos técnicos. É realizado duas vezes ao ano — em janeiro e julho — com provas de múltipla escolha de conhecimentos gerais.</p>
+      <p>O Vestibulinho é o processo seletivo das ETECs (Centro Paula Souza) para ingresso nos cursos técnicos. Realizado duas vezes ao ano — em janeiro e julho — com provas de múltipla escolha de conhecimentos gerais.</p>
     </div>
     <div class="vest-box">
       <h3>// Modalidades de vaga</h3>
       <ul>
-        <li><strong>Ensino Técnico Independente (Modular):</strong> para quem já concluiu o ensino médio. Duração de 18 meses (3 módulos de 6 meses), no período noturno.</li>
-        <li><strong>Qualificações intermediárias:</strong> ao término do Módulo I você recebe certificado de Auxiliar em DS; após o Módulo II, de Programador de Computadores; e após o Módulo III, a habilitação completa de Técnico em DS.</li>
-        <li><strong>Vagas Remanescentes:</strong> vagas que sobram após o processo seletivo principal, preenchidas por ordem de inscrição — sem necessidade de prova.</li>
+        <li><strong>Ensino Técnico Independente (Modular):</strong> para quem já concluiu o ensino médio. 18 meses no período noturno.</li>
+        <li><strong>Qualificações intermediárias:</strong> Módulo I = Auxiliar em DS · Módulo II = Programador de Computadores · Módulo III = Técnico em DS.</li>
+        <li><strong>Vagas Remanescentes:</strong> vagas que sobram após o processo seletivo, preenchidas por ordem de inscrição — sem prova.</li>
       </ul>
     </div>
   </div>
 
-  <div class="section-label reveal" style="margin-top:1rem">Como se inscrever?</div>
-
+  <div class="section-label reveal">Como se inscrever?</div>
   <div class="vest-box reveal" style="margin-bottom:2rem">
     <h3>// Passo a passo</h3>
     <ul>
       <li>Acesse o portal oficial: <strong>vestibulinhoetec.com.br</strong></li>
       <li>Crie seu cadastro com CPF, dados pessoais e e-mail válido.</li>
       <li>Escolha a ETEC, o curso e o turno desejado.</li>
-      <li>Confirme a inscrição — é gratuita, sem taxa de inscrição.</li>
+      <li>Confirme a inscrição — é gratuita, sem taxa.</li>
       <li>Aguarde o cartão de confirmação com local, data e horário da prova.</li>
       <li>Compareça com documento com foto no dia da prova.</li>
     </ul>
   </div>
 
-  <!-- TABELA DE DATAS -->
   <div class="section-label reveal">Calendário do Processo Seletivo</div>
-  <h2 class="reveal" style="font-size:1.6rem">Datas <span class="hl">importantes</span></h2>
+  <h2 class="reveal" style="font-size:clamp(1.2rem,3vw,1.6rem)">Datas <span class="hl">importantes</span></h2>
 
   <div class="table-wrap reveal">
     <table>
@@ -868,62 +801,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>Abertura das inscrições</td>
-          <td>Novembro</td>
-          <td>Maio</td>
-          <td><span class="badge badge-purple">Inscrições</span></td>
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>Encerramento das inscrições</td>
-          <td>Novembro/Dezembro</td>
-          <td>Maio/Junho</td>
-          <td><span class="badge badge-purple">Inscrições</span></td>
-        </tr>
-        <tr>
-          <td>03</td>
-          <td>Divulgação do local de prova</td>
-          <td>Dezembro</td>
-          <td>Junho</td>
-          <td><span class="badge badge-orange">Aguardar</span></td>
-        </tr>
-        <tr>
-          <td>04</td>
-          <td>Aplicação das provas</td>
-          <td>Janeiro</td>
-          <td>Julho</td>
-          <td><span class="badge badge-orange">Prova</span></td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>Divulgação do gabarito</td>
-          <td>Janeiro (mesmo dia)</td>
-          <td>Julho (mesmo dia)</td>
-          <td><span class="badge badge-orange">Resultado</span></td>
-        </tr>
-        <tr>
-          <td>06</td>
-          <td>Resultado final</td>
-          <td>Janeiro/Fevereiro</td>
-          <td>Julho/Agosto</td>
-          <td><span class="badge badge-green">Classificação</span></td>
-        </tr>
-        <tr>
-          <td>07</td>
-          <td>Matrícula dos aprovados</td>
-          <td>Fevereiro</td>
-          <td>Agosto</td>
-          <td><span class="badge badge-green">Matrícula</span></td>
-        </tr>
-        <tr>
-          <td>08</td>
-          <td>Vagas Remanescentes</td>
-          <td>Fevereiro (pós-matrícula)</td>
-          <td>Agosto (pós-matrícula)</td>
-          <td><span class="badge badge-purple">Remanescentes</span></td>
-        </tr>
+        <tr><td>01</td><td>Abertura das inscrições</td><td>Novembro</td><td>Maio</td><td><span class="badge badge-purple">Inscrições</span></td></tr>
+        <tr><td>02</td><td>Encerramento das inscrições</td><td>Nov / Dez</td><td>Mai / Jun</td><td><span class="badge badge-purple">Inscrições</span></td></tr>
+        <tr><td>03</td><td>Divulgação do local de prova</td><td>Dezembro</td><td>Junho</td><td><span class="badge badge-orange">Aguardar</span></td></tr>
+        <tr><td>04</td><td>Aplicação das provas</td><td>Janeiro</td><td>Julho</td><td><span class="badge badge-orange">Prova</span></td></tr>
+        <tr><td>05</td><td>Divulgação do gabarito</td><td>Janeiro</td><td>Julho</td><td><span class="badge badge-orange">Resultado</span></td></tr>
+        <tr><td>06</td><td>Resultado final</td><td>Jan / Fev</td><td>Jul / Ago</td><td><span class="badge badge-green">Classificação</span></td></tr>
+        <tr><td>07</td><td>Matrícula dos aprovados</td><td>Fevereiro</td><td>Agosto</td><td><span class="badge badge-green">Matrícula</span></td></tr>
+        <tr><td>08</td><td>Vagas Remanescentes</td><td>Fev (pós-matrícula)</td><td>Ago (pós-matrícula)</td><td><span class="badge badge-purple">Remanescentes</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -938,12 +823,11 @@
 </section>
 
 <footer>
-  <span>// Desenvolvimento de Sistemas — ETEC</span>
+  <span>// Desenvolvimento de Sistemas — ETEC Embu</span>
   <span>Centro Paula Souza · São Paulo</span>
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -953,7 +837,7 @@
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
   reveals.forEach(el => obs.observe(el));
 </script>
 </body>
